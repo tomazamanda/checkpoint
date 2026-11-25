@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clientes · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/clientes.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <nav aria-label="Principal">
+      <a href="/">Início</a>
+      <a href="/balcao.html">Balcão</a>
+      <a href="/clientes.html" aria-current="page">Clientes</a>
+      <a href="/produtos.html">Produtos</a>
+      <a href="/projeto-social.html">Projeto social</a>
+      <a href="/relatorios.html">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="cabecalho-secao">
+      <h1>Clientes</h1>
+      <button type="button" id="botao-novo-cliente" class="botao">Cadastrar cliente</button>
+    </div>
+    <p id="aviso" class="aviso" role="status" aria-live="polite" hidden></p>
+
+    <section aria-label="Lista de clientes">
+      <div class="campo busca">
+        <label for="busca">Buscar por nome ou CPF</label>
+        <!-- type="search" mostra o X para limpar a busca. -->
+        <input id="busca" type="search" autocomplete="off">
+      </div>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Nome</th><th scope="col" class="numero">Idade</th>
+              <th scope="col">Responsável</th><th scope="col">Telefone</th>
+              <th scope="col">Crédito social</th>
+            </tr>
+          </thead>
+          <tbody id="lista-clientes"></tbody>
+        </table>
+      </div>
+      <!-- Os botões de página são criados pelo JS. -->
+      <nav class="paginacao" id="paginacao-clientes" aria-label="Páginas da lista de clientes"></nav>
+    </section>
+  </main>
+
+  <dialog id="dialogo-cliente" aria-labelledby="titulo-cliente">
+    <form id="form-cliente">
+      <h2 id="titulo-cliente">Cadastrar cliente</h2>
+      <div class="campo">
+        <label for="cliente-cpf">CPF</label>
+        <!-- pattern confere o formato do CPF antes de enviar e o title vira a mensagem de erro. -->
+        <input id="cliente-cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="CPF com 11 números" required>
+        <p class="dica">Se o CPF já for de um responsável ou funcionário, o cadastro dele é aproveitado.</p>
+      </div>
+      <div class="campo">
+        <label for="cliente-nome">Nome completo</label>
+        <input id="cliente-nome" name="nome" autocomplete="off" required>
+      </div>
+      <div class="campo">
+        <label for="cliente-nascimento">Data de nascimento</label>
+        <!-- type="date" abre o calendário do navegador. -->
+        <input id="cliente-nascimento" name="dataNasc" type="date" required>
+      </div>
+      <div class="campo">
+        <label for="cliente-telefone">Telefone (opcional)</label>
+        <input id="cliente-telefone" name="telefone" type="tel">
+      </div>
+      <div class="campo">
+        <label for="cliente-email">E-mail (opcional)</label>
+        <input id="cliente-email" name="email" type="email">
+      </div>
+      <!-- Só aparece se a data de nascimento for menor de 18 anos (clientes.js). -->
+      <fieldset id="grupo-responsavel" hidden>
+        <legend>Responsável (cliente menor de 18 anos)</legend>
+        <div class="campo">
+          <label for="cliente-responsavel">Responsável</label>
+          <select id="cliente-responsavel" name="responsavelId"></select>
+        </div>
+        <div class="campo">
+          <label for="cliente-parentesco">Parentesco</label>
+          <input id="cliente-parentesco" name="parentesco" placeholder="mãe, pai, avó...">
+        </div>
+      </fieldset>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Cadastrar cliente</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

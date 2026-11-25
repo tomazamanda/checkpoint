@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comanda · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/comanda.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <nav aria-label="Principal">
+      <a href="/">Início</a>
+      <a href="/balcao.html">Balcão</a>
+      <a href="/clientes.html">Clientes</a>
+      <a href="/produtos.html">Produtos</a>
+      <a href="/projeto-social.html">Projeto social</a>
+      <a href="/relatorios.html">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="voltar" href="/balcao.html">Voltar ao balcão</a>
+    <div class="cabecalho-secao">
+      <h1 id="titulo-comanda">Comanda</h1>
+      <!-- Os dois botões começam escondidos; o comanda.js mostra conforme a situação da comanda. -->
+      <div class="acoes">
+        <button type="button" id="botao-cancelar-comanda" class="botao-secundario" hidden>Cancelar comanda</button>
+        <button type="button" id="botao-fechar-comanda" class="botao" hidden>Fechar comanda</button>
+      </div>
+    </div>
+    <p id="dados-comanda" class="subtitulo">Carregando...</p>
+    <p id="aviso" class="aviso" role="status" aria-live="polite" hidden></p>
+
+    <section aria-labelledby="titulo-itens">
+      <h2 id="titulo-itens">Produtos</h2>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Produto</th><th scope="col" class="numero">Qtd.</th>
+              <th scope="col" class="numero">Preço</th><th scope="col" class="numero">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="lista-itens"></tbody>
+        </table>
+      </div>
+
+      <!-- Só aparece com a comanda aberta. -->
+      <form id="form-item" class="form-linha" hidden>
+        <div class="campo">
+          <label for="item-produto">Produto</label>
+          <select id="item-produto" name="produtoId" required></select>
+        </div>
+        <div class="campo">
+          <label for="item-quantidade">Quantidade</label>
+          <input id="item-quantidade" name="quantidade" inputmode="numeric" autocomplete="off" value="1" required>
+        </div>
+        <button type="submit" class="botao">Adicionar à comanda</button>
+        <p class="erro-form" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <section aria-labelledby="titulo-sessoes">
+      <h2 id="titulo-sessoes">Sessões</h2>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Estação</th><th scope="col">Início</th>
+              <th scope="col" class="numero">Minutos</th><th scope="col" class="numero">Valor</th>
+            </tr>
+          </thead>
+          <tbody id="lista-sessoes"></tbody>
+        </table>
+      </div>
+      <p id="nota-sessoes" class="nota" hidden>Sessões em andamento entram no total quando forem encerradas no balcão.</p>
+    </section>
+
+    <p class="total">Total: <strong id="total-comanda">R$ 0,00</strong></p>
+  </main>
+
+  <dialog id="dialogo-fechar" aria-labelledby="titulo-fechar">
+    <form id="form-fechar">
+      <h2 id="titulo-fechar">Fechar comanda</h2>
+      <p id="total-fechamento"></p>
+      <fieldset>
+        <legend>Forma de pagamento</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="formaPagamento" value="dinheiro" required> Dinheiro</label>
+          <label><input type="radio" name="formaPagamento" value="pix"> Pix</label>
+          <label><input type="radio" name="formaPagamento" value="debito"> Débito</label>
+          <label><input type="radio" name="formaPagamento" value="credito"> Crédito</label>
+        </div>
+      </fieldset>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Fechar comanda</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-cancelar" aria-labelledby="titulo-cancelar">
+    <form id="form-cancelar">
+      <h2 id="titulo-cancelar">Cancelar comanda</h2>
+      <p>A comanda fica cancelada e não é cobrada. Os produtos lançados voltam para o estoque.</p>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Voltar</button>
+        <button type="submit" class="botao">Cancelar comanda</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

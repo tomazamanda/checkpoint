@@ -1,0 +1,720 @@
+/* Identidade do Checkpoint: preto com verde-musgo nas ações.
+   Toda cor vem destas variáveis; para mudar a paleta, mude só aqui. */
+
+@font-face {
+  font-family: "Albert Sans";
+  src: url("../fontes/albert-sans.woff2") format("woff2");
+  font-weight: 100 900;   /* um arquivo só com todos os pesos */
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;   /* campos, calendário e barras de rolagem do navegador também no escuro */
+
+  --cor-topo: #000000;
+  --cor-fundo: #0B0B0C;
+  --cor-superficie: #151517;
+  --cor-divisor: #2A2A2E;
+  --cor-borda-campo: #6B7588;
+  --cor-hover: #222226;
+  --cor-linha-alternada: #121214;
+  --cor-titulo: #F2F4F8;
+  --cor-texto: #E6E9EF;
+  --cor-texto-secundario: #9EA7B6;
+  --cor-destaque: #5A6B3A;
+  --cor-destaque-hover: #4A5A2A;
+  --cor-link: #A8B47A;
+  --cor-destaque-fundo: #1C2114;
+  --cor-ok: #4ADE80;
+  --cor-ok-fundo: #0F2A1C;
+  --cor-atencao: #FBBF24;
+  --cor-atencao-fundo: #2B2310;
+  --cor-erro: #F87171;
+  --cor-erro-fundo: #2D1517;
+
+  --fonte: "Albert Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --raio-campo: 2px;
+  --raio-painel: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+h1,
+h2 {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--cor-titulo);
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.125rem;
+}
+
+a {
+  color: var(--cor-link);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cor-link);
+  outline-offset: 2px;
+}
+
+/* ---------- Topo e navegação ---------- */
+
+.topo {
+  background: var(--cor-topo);
+  border-bottom: 1px solid var(--cor-divisor);
+  color: var(--cor-texto);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 32px;
+  padding: 12px 24px;
+}
+
+.marca {
+  font-weight: 800;
+  font-size: 1.25rem;
+  text-transform: uppercase;   /* só a marca fica em maiúsculas */
+  letter-spacing: 0.04em;
+  color: var(--cor-titulo);
+  text-decoration: none;
+}
+
+.topo nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.topo nav a {
+  color: var(--cor-texto);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 3px solid transparent;
+}
+
+.topo nav a:hover {
+  border-bottom-color: var(--cor-borda-campo);
+}
+
+.topo nav a[aria-current="page"] {
+  border-bottom-color: var(--cor-link);
+  color: var(--cor-titulo);
+  font-weight: 700;
+}
+
+/* Nome de quem está logado e o botão Sair, no canto direito do topo */
+.usuario {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+}
+
+/* Sair como texto, igual aos itens do menu, separado do nome por uma barra fina */
+.sair {
+  font: inherit;
+  color: var(--cor-texto-secundario);
+  background: none;
+  border: 0;
+  border-left: 1px solid var(--cor-divisor);
+  padding: 0 0 0 12px;
+  cursor: pointer;
+}
+
+.sair:hover {
+  color: var(--cor-titulo);
+}
+
+/* ---------- Login ---------- */
+
+/* Coluna estreita e tudo um pouco menor que nas telas de trabalho */
+main.pagina-login {
+  max-width: 24rem;
+  margin-top: 10vh;
+  padding: 32px;
+  background: var(--cor-superficie);   /* só o fundo mais claro: sem borda nem sombra */
+  border-radius: var(--raio-painel);
+}
+
+.pagina-login .subtitulo {
+  font-size: 0.875rem;
+  margin-top: 6px;
+}
+
+.pagina-login form {
+  margin-top: 24px;
+  gap: 14px;
+}
+
+.pagina-login label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.pagina-login input:not([type="radio"]) {
+  height: 2.5rem;
+  font-size: 0.9375rem;
+}
+
+/* o Chrome pinta de azul o campo preenchido automaticamente; mantém o fundo da página */
+.pagina-login input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px var(--cor-fundo) inset;
+  -webkit-text-fill-color: var(--cor-texto);
+  caret-color: var(--cor-texto);
+}
+
+.pagina-login .botao {
+  height: 2.5rem;
+  margin-top: 4px;
+}
+
+/* ---------- Página ---------- */
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+main > section {
+  margin-top: 48px;
+}
+
+.subtitulo {
+  color: var(--cor-texto-secundario);
+  margin: 8px 0 0;
+}
+
+.cabecalho-secao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.colunas {
+  display: grid;
+  gap: 48px 32px;
+  margin-top: 48px;
+}
+
+.colunas > section {
+  min-width: 0;
+}
+
+@media (min-width: 60em) {
+  .colunas {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Título, conclusão e tabela usam as linhas do grid do pai (subgrid): se um título
+     quebra em duas linhas, a tabela do lado desce junto e as duas começam alinhadas */
+  .colunas > section {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    align-content: start;
+  }
+
+  /* títulos das duas colunas sempre na mesma altura, no topo da linha */
+  .colunas > section > :first-child {
+    align-self: start;
+  }
+}
+
+.nota {
+  color: var(--cor-texto-secundario);
+  font-size: 0.875rem;
+  margin: 8px 0 0;
+}
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+/* ---------- Faixa do caixa ---------- */
+
+.faixa-caixa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 24px;
+  padding: 24px;   /* mesmo espaço dos cartões de baixo */
+  background: var(--cor-superficie);
+  border-radius: var(--raio-painel);
+}
+
+/* Título em cima e texto embaixo, como nos cartões */
+.faixa-caixa-texto {
+  flex: 1 1 20em;
+}
+
+.faixa-caixa p {
+  margin: 8px 0 0;
+  color: var(--cor-texto-secundario);   /* mesmo cinza do texto dos cartões */
+}
+
+/* ---------- Avisos ---------- */
+
+.aviso {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border-radius: var(--raio-campo);
+  border: 1px solid currentColor;
+}
+
+.aviso-ok {
+  color: var(--cor-ok);
+  background: var(--cor-ok-fundo);
+}
+
+.aviso-erro {
+  color: var(--cor-erro);
+  background: var(--cor-erro-fundo);
+}
+
+.erro-form {
+  color: var(--cor-erro);
+  background: var(--cor-erro-fundo);
+  padding: 8px 12px;
+  border-radius: var(--raio-campo);
+  margin: 0;
+}
+
+/* ---------- Tabelas ---------- */
+
+.tabela {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px 14px;
+  vertical-align: middle;
+}
+
+th {
+  font-size: 0.8125rem;
+  color: var(--cor-texto-secundario);
+  font-weight: 700;
+  border-bottom: 2px solid var(--cor-borda-campo);
+}
+
+/* Sem linha entre as linhas: o fundo alternado guia o olho na linha certa */
+tbody tr:nth-child(even) td {
+  background: var(--cor-linha-alternada);
+}
+
+.numero {
+  text-align: right;
+  white-space: nowrap;
+}
+
+tfoot td {
+  font-weight: 700;
+  border-top: 2px solid var(--cor-borda-campo);
+}
+
+.linha-estado {
+  color: var(--cor-texto-secundario);
+  padding: 20px 14px;
+}
+
+.linha-erro {
+  color: var(--cor-erro);
+}
+
+tbody tr.destacada td {
+  background: var(--cor-destaque-fundo);
+}
+
+/* ---------- Paginação ---------- */
+
+.paginacao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+}
+
+/* ---------- Status em texto ---------- */
+
+.texto-destaque {
+  color: var(--cor-link);
+  font-weight: 700;
+}
+
+/* ---------- Botões ---------- */
+
+.botao,
+.botao-secundario {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 5px 14px;
+  border-radius: var(--raio-campo);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.botao {
+  background: var(--cor-destaque);
+  border: 2px solid var(--cor-destaque);
+  color: #FFFFFF;
+}
+
+.botao:hover {
+  background: var(--cor-destaque-hover);
+  border-color: var(--cor-destaque-hover);
+}
+
+.botao-secundario {
+  background: transparent;
+  border: 2px solid var(--cor-borda-campo);
+  color: var(--cor-texto);
+}
+
+.botao-secundario:hover {
+  background: var(--cor-hover);
+}
+
+.botao:disabled,
+.botao-secundario:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botao-pequeno {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+}
+
+a.botao,
+a.botao-secundario {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* ---------- Formulários ---------- */
+
+form {
+  display: grid;
+  gap: 16px;
+}
+
+label,
+legend {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.campo {
+  display: grid;
+  gap: 4px;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda-campo);
+  border-radius: var(--raio-campo);
+  padding: 8px 10px;
+  width: 100%;
+}
+
+/* select e input com a mesma altura para alinharem lado a lado */
+input:not([type="radio"]),
+select {
+  height: 2.625rem;
+}
+
+/* Lista com busca (selectComBusca): o select fica invisível embaixo do campo.
+   Não usa display: none para o navegador ainda conseguir avisar "campo obrigatório" nele. */
+.select-busca {
+  position: relative;
+}
+
+.select-busca select {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Opções da lista com busca: abre logo abaixo do campo (posição calculada no api.js) */
+.busca-opcoes {
+  position: fixed;
+  z-index: 10;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  max-height: 15rem;
+  overflow-y: auto;
+  background: var(--cor-hover);
+  border-radius: 0 0 var(--raio-campo) var(--raio-campo);
+}
+
+.busca-opcoes li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.busca-opcoes li[aria-selected="true"],
+.busca-opcoes li:hover {
+  background: var(--cor-destaque-fundo);
+  color: var(--cor-titulo);
+}
+
+.busca-opcoes .busca-vazia {
+  color: var(--cor-texto-secundario);
+  cursor: default;
+}
+
+/* Campo de arquivo (foto da entrega): o botão segue o estilo dos botões de contorno */
+input[type="file"] {
+  padding: 6px;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 4px 10px;
+  margin-right: 12px;
+  background: transparent;
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-borda-campo);
+  border-radius: var(--raio-campo);
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  width: auto;
+  margin: 0;
+  accent-color: var(--cor-destaque);
+}
+
+/* Grupo sem caixa em volta: só a legenda, como os outros rótulos */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+legend {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+/* Grupo de campos (não de opções): legenda vira subtítulo para não se confundir com os rótulos */
+#grupo-responsavel {
+  margin-top: 8px;
+}
+
+#grupo-responsavel legend {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--cor-texto-secundario);
+}
+
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.opcoes label {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dica {
+  color: var(--cor-texto-secundario);
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.form-linha {
+  display: grid;
+  gap: 12px;
+  align-items: end;
+  margin-top: 16px;
+}
+
+@media (min-width: 40em) {
+  .form-linha {
+    grid-template-columns: 2fr 1fr auto;
+  }
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Caixas de diálogo ---------- */
+
+dialog {
+  width: min(32rem, calc(100vw - 32px));
+  border: none;
+  border-radius: var(--raio-painel);
+  padding: 24px;
+  color: var(--cor-texto);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-divisor);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+dialog h2 {
+  margin-bottom: 4px;
+}
+
+#confirmacao p {
+  margin: 0;
+}
+
+/* ---------- Detalhes (lista recolhível) ---------- */
+
+details {
+  background: var(--cor-superficie);
+  border-radius: var(--raio-painel);
+  overflow: hidden;   /* sem isso, a tabela de dentro cobre os cantos arredondados */
+}
+
+summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 700;
+}
+
+details .tabela {
+  background: var(--cor-fundo);
+}
+
+.busca {
+  max-width: 24rem;
+  margin-bottom: 12px;
+}
+
+.total {
+  font-size: 1.25rem;
+  margin: 16px 0 0;
+}
+
+.total strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Página de início ---------- */
+
+.atalhos {
+  display: grid;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+@media (min-width: 40em) {
+  .atalhos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.atalho {
+  display: block;
+  padding: 24px;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  text-decoration: none;
+  border-radius: var(--raio-painel);
+}
+
+.atalho:hover {
+  background: var(--cor-hover);
+}
+
+.atalho p {
+  margin: 8px 0 0;
+  color: var(--cor-texto-secundario);
+}
+
+/* Regras como .campo { display: grid } venceriam o atributo hidden do HTML.
+   Esta vem por último para o hidden sempre esconder. */
+[hidden] {
+  display: none;
+}
+
+/* ---------- Impressão ---------- */
+
+/* Pesquisei para estudar: @media print, regras que só valem ao imprimir (Ctrl+P).
+   Troco as variáveis de cor para fundo branco e texto preto, e escondo o que não serve no papel. */
+@media print {
+  :root {
+    color-scheme: light;
+    --cor-fundo: #FFFFFF;
+    --cor-superficie: #FFFFFF;
+    --cor-linha-alternada: #FFFFFF;
+    --cor-divisor: #CCCCCC;
+    --cor-titulo: #000000;
+    --cor-texto: #000000;
+    --cor-texto-secundario: #444444;
+  }
+
+  .topo,
+  #botao-imprimir {
+    display: none;
+  }
+}

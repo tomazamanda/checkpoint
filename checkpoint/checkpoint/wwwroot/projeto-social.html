@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projeto social · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/projeto-social.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <nav aria-label="Principal">
+      <a href="/">Início</a>
+      <a href="/balcao.html">Balcão</a>
+      <a href="/clientes.html">Clientes</a>
+      <a href="/produtos.html">Produtos</a>
+      <a href="/projeto-social.html" aria-current="page">Projeto social</a>
+      <a href="/relatorios.html">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="cabecalho-secao">
+      <h1>Projeto social</h1>
+      <button type="button" id="botao-iniciar" class="botao">Iniciar atividade</button>
+    </div>
+    <p class="subtitulo">Resumo de livro ou gibi e desafio de lógica viram minutos de jogo depois de aprovados.</p>
+    <p id="aviso" class="aviso" role="status" aria-live="polite" hidden></p>
+
+    <section aria-labelledby="titulo-avaliacao">
+      <h2 id="titulo-avaliacao">Aguardando avaliação</h2>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Atividade</th><th scope="col">Cliente</th>
+              <th scope="col">Entregue em</th><th scope="col">Foto</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="lista-entregues"></tbody>
+        </table>
+      </div>
+      <nav class="paginacao" id="paginacao-entregues" aria-label="Páginas das atividades aguardando avaliação"></nav>
+    </section>
+
+    <section aria-labelledby="titulo-andamento">
+      <h2 id="titulo-andamento">Em andamento</h2>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Atividade</th><th scope="col">Cliente</th>
+              <th scope="col">Início</th><th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="lista-andamento"></tbody>
+        </table>
+      </div>
+      <nav class="paginacao" id="paginacao-andamento" aria-label="Páginas das atividades em andamento"></nav>
+    </section>
+  </main>
+
+  <dialog id="dialogo-iniciar" aria-labelledby="titulo-iniciar">
+    <form id="form-iniciar">
+      <h2 id="titulo-iniciar">Iniciar atividade</h2>
+      <fieldset>
+        <legend>Tipo</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="tipo" value="resumos" checked> Resumo de obra</label>
+          <label><input type="radio" name="tipo" value="resolucoes"> Desafio</label>
+        </div>
+      </fieldset>
+      <div class="campo">
+        <label for="atividade-cliente">Cliente</label>
+        <select id="atividade-cliente" name="clienteId" required></select>
+      </div>
+      <div class="campo" id="campo-obra">
+        <label for="atividade-obra">Obra</label>
+        <select id="atividade-obra" name="obraId"></select>
+      </div>
+      <div class="campo" id="campo-desafio" hidden>
+        <label for="atividade-desafio">Desafio</label>
+        <select id="atividade-desafio" name="desafioId"></select>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Iniciar atividade</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-entregar" aria-labelledby="titulo-entregar">
+    <form id="form-entregar">
+      <h2 id="titulo-entregar">Registrar entrega</h2>
+      <p id="entregar-descricao" class="dica"></p>
+      <div class="campo">
+        <label for="entregar-foto">Foto do trabalho</label>
+        <!-- type="file" abre a escolha de arquivo e accept limita a JPG e PNG. O tamanho é conferido na API. -->
+        <input id="entregar-foto" name="foto" type="file" accept="image/jpeg,image/png" required>
+        <p class="dica">Fotografe a folha do resumo ou da resolução. JPG ou PNG, até 5 MB.</p>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Registrar entrega</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-avaliar" aria-labelledby="titulo-avaliar">
+    <form id="form-avaliar">
+      <h2 id="titulo-avaliar">Avaliar atividade</h2>
+      <p id="avaliar-descricao" class="dica"></p>
+      <!-- target="_blank" abre a foto em outra aba. Pesquisei para estudar: rel="noopener" impede a outra aba de mexer nesta. -->
+      <p><a id="avaliar-foto" target="_blank" rel="noopener">Abrir a foto do trabalho</a></p>
+      <fieldset>
+        <legend>Resultado</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="resultado" value="aprovado" required> Aprovado</label>
+          <label><input type="radio" name="resultado" value="recusado"> Recusado</label>
+        </div>
+      </fieldset>
+      <div class="campo">
+        <label for="avaliar-observacao">Observação (opcional)</label>
+        <textarea id="avaliar-observacao" name="observacao" rows="3"></textarea>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Salvar avaliação</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

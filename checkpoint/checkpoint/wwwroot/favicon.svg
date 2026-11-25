@@ -1,0 +1,18 @@
+<!-- Pesquisei para estudar: SVG, que desenha a imagem com formas e coordenadas em vez de pixels, por isso não perde qualidade ao mudar de tamanho. -->
+<!-- Usei para o ícone da aba do navegador: uma bandeira de checkpoint. -->
+<!-- O viewBox="0 0 32 32" cria uma área de desenho de 32 x 32. O (0,0) fica no canto de cima à esquerda e o y cresce para baixo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Fundo preto do tamanho da área toda. O rx arredonda os cantos. -->
+  <rect width="32" height="32" rx="2" fill="#000000"/>
+  <!-- Mastro branco: começa no ponto x=9, y=6, com 3 de largura e 21 de altura. -->
+  <rect x="9" y="6" width="3" height="21" fill="#FFFFFF"/>
+  <!-- Bandeira verde. O path vai ligando pontos, como desenhar sem tirar o lápis do papel:
+       M12 7  começa em (12,7)
+       h12    anda 12 na horizontal, até (24,7)
+       l-3 5  volta 3 e desce 5, até (21,12), que faz o recorte da bandeira
+       3 5    anda 3 e desce 5, até (24,17)
+       H12    volta na horizontal até x=12, ficando em (12,17)
+       z      fecha a forma, voltando ao ponto inicial
+       Letra maiúscula usa posição exata e minúscula conta a partir do ponto anterior. -->
+  <path d="M12 7h12l-3 5 3 5H12z" fill="#5A6B3A"/>
+</svg>

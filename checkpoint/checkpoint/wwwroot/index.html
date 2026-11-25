@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <!-- Ajusta a página à largura da tela do celular. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Início · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <!-- Pesquisei para estudar: type="module" deixa o JS usar import/export e só roda depois que o HTML carrega. -->
+  <script type="module" src="/js/inicio.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <!-- Menu repetido em todas as telas. Pesquisei para estudar: aria-label dá nome ao menu para o leitor de tela. -->
+    <nav aria-label="Principal">
+      <!-- aria-current marca a tela atual; o CSS usa ele para sublinhar o link. -->
+      <a href="/" aria-current="page">Início</a>
+      <a href="/balcao.html">Balcão</a>
+      <a href="/clientes.html">Clientes</a>
+      <a href="/produtos.html">Produtos</a>
+      <a href="/projeto-social.html">Projeto social</a>
+      <a href="/relatorios.html">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Início</h1>
+    <!-- Os elementos com id são preenchidos pelo inicio.js com os dados da API. -->
+    <p id="hoje" class="subtitulo"></p>
+
+    <!-- aria-labelledby liga a seção ao título dela pelo id. -->
+    <section class="faixa-caixa" aria-labelledby="titulo-caixa">
+      <div class="faixa-caixa-texto">
+        <h2 id="titulo-caixa">Caixa</h2>
+        <p id="situacao-caixa">Carregando...</p>
+      </div>
+      <a class="botao" href="/balcao.html" id="link-caixa">Ir para o balcão</a>
+    </section>
+
+    <!-- Cada card é um link inteiro: o <a> envolve o título e o texto. -->
+    <nav class="atalhos" aria-label="Áreas do sistema">
+      <a class="atalho" href="/balcao.html">
+        <h2>Balcão</h2>
+        <p id="resumo-balcao">Carregando...</p>
+      </a>
+      <a class="atalho" href="/clientes.html">
+        <h2>Clientes</h2>
+        <p id="resumo-clientes">Carregando...</p>
+      </a>
+      <a class="atalho" href="/projeto-social.html">
+        <h2>Projeto social</h2>
+        <p id="resumo-social">Carregando...</p>
+      </a>
+      <a class="atalho" href="/relatorios.html">
+        <h2>Relatórios</h2>
+        <p id="resumo-relatorios">Carregando...</p>
+      </a>
+    </nav>
+  </main>
+</body>
+</html>

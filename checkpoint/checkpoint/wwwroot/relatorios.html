@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatórios · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/relatorios.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <nav aria-label="Principal">
+      <a href="/">Início</a>
+      <a href="/balcao.html">Balcão</a>
+      <a href="/clientes.html">Clientes</a>
+      <a href="/produtos.html">Produtos</a>
+      <a href="/projeto-social.html">Projeto social</a>
+      <a href="/relatorios.html" aria-current="page">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="cabecalho-secao">
+      <h1>Relatórios</h1>
+      <!-- Abre a janela de impressão do navegador; lá dá para escolher "Salvar como PDF". -->
+      <button type="button" id="botao-imprimir" class="botao">Imprimir</button>
+    </div>
+    <p class="subtitulo">Comandas fechadas, sessões encerradas e estoque atual.</p>
+
+    <section aria-labelledby="titulo-estoque">
+      <h2 id="titulo-estoque">Estoque baixo</h2>
+      <!-- As frases de conclusão são escritas pelo relatorios.js. -->
+      <p id="conclusao-estoque" class="subtitulo"></p>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Produto</th><th scope="col">Tipo</th>
+              <th scope="col" class="numero">Em estoque</th><th scope="col" class="numero">Mínimo</th>
+            </tr>
+          </thead>
+          <tbody id="lista-estoque"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-faturamento">
+      <h2 id="titulo-faturamento">Faturamento por forma de pagamento</h2>
+      <p id="conclusao-faturamento" class="subtitulo"></p>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Forma</th><th scope="col" class="numero">Comandas</th>
+              <th scope="col" class="numero">Total</th>
+            </tr>
+          </thead>
+          <tbody id="lista-faturamento"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-sessoes">
+      <h2 id="titulo-sessoes">Sessões por tipo de estação</h2>
+      <p id="conclusao-sessoes" class="subtitulo"></p>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Tipo</th><th scope="col" class="numero">Sessões</th>
+              <th scope="col" class="numero">Total</th>
+            </tr>
+          </thead>
+          <tbody id="lista-sessoes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-produtos">
+      <h2 id="titulo-produtos">Produtos mais vendidos</h2>
+      <p id="conclusao-produtos" class="subtitulo"></p>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Produto</th><th scope="col" class="numero">Unidades</th>
+              <th scope="col" class="numero">Total</th>
+            </tr>
+          </thead>
+          <tbody id="lista-produtos"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

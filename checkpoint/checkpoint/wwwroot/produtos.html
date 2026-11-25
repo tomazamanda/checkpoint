@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produtos · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/produtos.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <nav aria-label="Principal">
+      <a href="/">Início</a>
+      <a href="/balcao.html">Balcão</a>
+      <a href="/clientes.html">Clientes</a>
+      <a href="/produtos.html" aria-current="page">Produtos</a>
+      <a href="/projeto-social.html">Projeto social</a>
+      <a href="/relatorios.html">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="cabecalho-secao">
+      <h1>Produtos</h1>
+      <button type="button" id="botao-novo-produto" class="botao">Cadastrar produto</button>
+    </div>
+    <p id="aviso" class="aviso" role="status" aria-live="polite" hidden></p>
+
+    <section aria-label="Lista de produtos">
+      <div class="campo busca">
+        <label for="busca">Buscar por nome</label>
+        <input id="busca" type="search" autocomplete="off">
+      </div>
+      <div class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Produto</th><th scope="col">Tipo</th>
+              <th scope="col" class="numero">Preço</th><th scope="col" class="numero">Em estoque</th>
+              <th scope="col" class="numero">Mínimo</th><th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="lista-produtos"></tbody>
+        </table>
+      </div>
+      <nav class="paginacao" id="paginacao-produtos" aria-label="Páginas da lista de produtos"></nav>
+    </section>
+  </main>
+
+  <dialog id="dialogo-produto" aria-labelledby="titulo-produto">
+    <form id="form-produto">
+      <h2 id="titulo-produto">Cadastrar produto</h2>
+      <div class="campo">
+        <label for="produto-nome">Nome</label>
+        <!-- maxlength segue o tamanho da coluna no banco (VARCHAR(100)). -->
+        <input id="produto-nome" name="nome" maxlength="100" autocomplete="off" required>
+      </div>
+      <fieldset>
+        <legend>Tipo</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="tipo" value="venda" checked> À venda no balcão</label>
+          <label><input type="radio" name="tipo" value="material interno"> Material interno</label>
+        </div>
+        <p class="dica">Material interno (papel, toner) entra no estoque, mas não é vendido.</p>
+      </fieldset>
+      <div class="campo">
+        <label for="produto-unidade">Unidade</label>
+        <input id="produto-unidade" name="unidade" maxlength="10" placeholder="un, pacote, porção" autocomplete="off" required>
+      </div>
+      <!-- Some quando o tipo é material interno, que não é vendido (produtos.js). -->
+      <div class="campo" id="campo-preco">
+        <label for="produto-preco">Preço de venda (R$)</label>
+        <input id="produto-preco" name="precoVenda" inputmode="numeric" autocomplete="off" placeholder="0,00" required>
+      </div>
+      <div class="campo">
+        <label for="produto-estoque">Quantidade em estoque</label>
+        <input id="produto-estoque" name="qtdEstoque" inputmode="numeric" autocomplete="off" value="0" required>
+      </div>
+      <div class="campo">
+        <label for="produto-minimo">Estoque mínimo</label>
+        <input id="produto-minimo" name="qtdMinima" inputmode="numeric" autocomplete="off" value="10" required>
+        <p class="dica">Com essa quantidade ou menos, o produto aparece em Estoque baixo, nos Relatórios.</p>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Cadastrar produto</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-repor" aria-labelledby="titulo-repor">
+    <form id="form-repor">
+      <h2 id="titulo-repor">Repor estoque</h2>
+      <p class="dica" id="repor-produto"></p>
+      <div class="campo">
+        <label for="repor-quantidade">Quantidade que chegou</label>
+        <input id="repor-quantidade" name="quantidade" inputmode="numeric" autocomplete="off" required>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Repor</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

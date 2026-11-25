@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/login.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <span class="marca">Checkpoint</span>
+  </header>
+
+  <main class="pagina-login">
+    <h1>Entrar</h1>
+    <p class="subtitulo">Use o e-mail e a senha de funcionário.</p>
+
+    <!-- O login.js pega o envio do formulário e manda e-mail e senha para a API. -->
+    <form id="form-login">
+      <div class="campo">
+        <label for="login-email">E-mail</label>
+        <!-- type="email" e required: o navegador confere antes de enviar. O autocomplete deixa o navegador salvar o login. -->
+        <input id="login-email" name="email" type="email" autocomplete="username" required autofocus>
+      </div>
+      <div class="campo">
+        <label for="login-senha">Senha</label>
+        <input id="login-senha" name="senha" type="password" autocomplete="current-password" required>
+      </div>
+      <!-- Começa escondido (hidden). Pesquisei para estudar: role="alert" faz o leitor de tela ler o erro quando ele aparece. -->
+      <p class="erro-form" role="alert" hidden></p>
+      <button type="submit" class="botao">Entrar</button>
+    </form>
+  </main>
+</body>
+</html>

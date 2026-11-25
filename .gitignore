@@ -1,0 +1,14 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+
+# Windows
+desktop.ini
+
+# Senha do MySQL (veja o README)
+checkpoint/checkpoint/Database/Conexao.cs
+
+# Fotos de resumos e resoluções enviadas pelo sistema
+checkpoint/checkpoint/wwwroot/fotos/

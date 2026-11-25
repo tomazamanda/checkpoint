@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Balcão · Checkpoint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/estilo.css">
+  <script type="module" src="/js/balcao.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="/">Checkpoint</a>
+    <nav aria-label="Principal">
+      <a href="/">Início</a>
+      <a href="/balcao.html" aria-current="page">Balcão</a>
+      <a href="/clientes.html">Clientes</a>
+      <a href="/produtos.html">Produtos</a>
+      <a href="/projeto-social.html">Projeto social</a>
+      <a href="/relatorios.html">Relatórios</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Balcão</h1>
+    <!-- Pesquisei para estudar: aria-live="polite" avisa o leitor de tela quando o texto muda, sem interromper. -->
+    <p id="aviso" class="aviso" role="status" aria-live="polite" hidden></p>
+
+    <section class="faixa-caixa" aria-labelledby="titulo-caixa">
+      <div class="faixa-caixa-texto">
+        <h2 id="titulo-caixa">Caixa</h2>
+        <p id="situacao-caixa">Carregando...</p>
+      </div>
+      <!-- Só um dos dois botões aparece: o balcao.js mostra conforme o caixa está aberto ou fechado. -->
+      <button type="button" id="botao-abrir-caixa" class="botao" hidden>Abrir caixa</button>
+      <button type="button" id="botao-fechar-caixa" class="botao-secundario" hidden>Fechar caixa</button>
+    </section>
+
+    <div class="colunas">
+      <section aria-labelledby="titulo-comandas">
+        <div class="cabecalho-secao">
+          <h2 id="titulo-comandas">Comandas abertas</h2>
+          <button type="button" id="botao-abrir-comanda" class="botao">Abrir comanda</button>
+        </div>
+        <div class="tabela">
+          <table>
+            <thead>
+              <tr>
+                <!-- scope="col" indica que o th é o título da coluna. -->
+                <th scope="col">Nº</th><th scope="col">Cliente</th><th scope="col">Aberta em</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <!-- As linhas são criadas pelo balcao.js. -->
+            <tbody id="lista-comandas"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="titulo-sessoes">
+        <div class="cabecalho-secao">
+          <h2 id="titulo-sessoes">Sessões em andamento</h2>
+          <button type="button" id="botao-iniciar-sessao" class="botao">Iniciar sessão</button>
+        </div>
+        <div class="tabela">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Estação</th><th scope="col">Cliente</th>
+                <th scope="col">Início</th><th scope="col">Origem</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <tbody id="lista-sessoes"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="titulo-estacoes">
+      <h2 id="titulo-estacoes">Estações</h2>
+      <!-- Pesquisei para estudar: details e summary abrem e fecham sem JavaScript. O summary é a parte clicável. -->
+      <details>
+        <summary id="resumo-estacoes">Carregando estações...</summary>
+        <div class="tabela">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Nº</th><th scope="col">Tipo</th>
+                <th scope="col">Plataforma</th><th scope="col" class="numero">Preço por hora</th>
+              </tr>
+            </thead>
+            <tbody id="lista-estacoes"></tbody>
+          </table>
+        </div>
+        <nav class="paginacao" id="paginacao-estacoes" aria-label="Páginas da lista de estações"></nav>
+      </details>
+    </section>
+  </main>
+
+  <!-- Pesquisei para estudar: dialog é a janela que abre por cima da tela. O api.js abre com showModal() e fecha com close(). -->
+  <dialog id="dialogo-abrir-caixa" aria-labelledby="titulo-abrir-caixa">
+    <form id="form-abrir-caixa">
+      <h2 id="titulo-abrir-caixa">Abrir caixa</h2>
+      <p class="dica">O caixa fica no nome de quem está logado.</p>
+      <div class="campo">
+        <label for="caixa-valor">Dinheiro na gaveta (R$)</label>
+        <!-- inputmode="numeric" abre o teclado de números no celular. -->
+        <input id="caixa-valor" name="valorAbertura" inputmode="numeric" autocomplete="off" placeholder="0,00" required>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <!-- data-fechar é um atributo criado por mim: o api.js procura ele para fechar o dialog. -->
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Abrir caixa</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-abrir-comanda" aria-labelledby="titulo-abrir-comanda">
+    <form id="form-abrir-comanda">
+      <h2 id="titulo-abrir-comanda">Abrir comanda</h2>
+      <div class="campo">
+        <label for="comanda-cliente">Cliente</label>
+        <select id="comanda-cliente" name="clienteId"></select>
+        <p class="dica">Deixe "Sem cadastro" para venda de balcão.</p>
+      </div>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Abrir comanda</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-iniciar-sessao" aria-labelledby="titulo-iniciar-sessao">
+    <form id="form-iniciar-sessao">
+      <h2 id="titulo-iniciar-sessao">Iniciar sessão</h2>
+      <div class="campo">
+        <label for="sessao-cliente">Cliente</label>
+        <select id="sessao-cliente" name="clienteId" required></select>
+      </div>
+      <div class="campo">
+        <label for="sessao-estacao">Estação</label>
+        <select id="sessao-estacao" name="estacaoId" required></select>
+      </div>
+      <!-- fieldset agrupa campos e legend é o título do grupo. Radio com o mesmo name só deixa escolher um. -->
+      <fieldset>
+        <legend>Como vai pagar</legend>
+        <div class="opcoes">
+          <label><input type="radio" name="origem" value="paga" checked> Na comanda</label>
+          <label><input type="radio" name="origem" value="credito social"> Crédito do projeto social</label>
+        </div>
+        <p class="dica" id="saldo-social" aria-live="polite" hidden></p>
+        <div class="campo" id="campo-comanda">
+          <label for="sessao-comanda">Comanda</label>
+          <select id="sessao-comanda" name="comandaId"></select>
+        </div>
+      </fieldset>
+      <p class="erro-form" role="alert" hidden></p>
+      <div class="acoes">
+        <button type="button" class="botao-secundario" data-fechar>Cancelar</button>
+        <button type="submit" class="botao">Iniciar sessão</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="confirmacao">
+    <!-- method="dialog" fecha o dialog sem enviar nada; o value do botão clicado diz se confirmou. -->
+    <form method="dialog">
+      <p></p>
+      <div class="acoes">
+        <button value="nao" class="botao-secundario">Voltar</button>
+        <button value="sim" class="botao">Confirmar</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,64 @@
+### Teste a API pelo Visual Studio: clique em "Enviar solicitação" acima de cada bloco.
+@api = http://localhost:5080/api
+
+### Login: rode este primeiro. Sem ele, os outros pedidos respondem 401.
+POST {{api}}/login
+Content-Type: application/json
+
+{ "email": "alice.batista111@example.com", "senha": "checkpoint123" }
+
+###
+GET {{api}}/login/eu
+
+### Clientes
+GET {{api}}/clientes
+
+###
+GET {{api}}/clientes/46/saldo-social
+
+###
+POST {{api}}/clientes
+Content-Type: application/json
+
+{
+  "cpf": "12345678901",
+  "nome": "Cliente de Teste",
+  "dataNasc": "2000-05-10",
+  "telefone": "69999990000",
+  "email": null,
+  "responsavelId": null,
+  "parentesco": null
+}
+
+### Estações
+GET {{api}}/estacoes/disponiveis
+
+### Caixa
+GET {{api}}/caixa/aberto
+
+### Comandas
+GET {{api}}/comandas/abertas
+
+###
+GET {{api}}/comandas/55
+
+###
+POST {{api}}/comandas/55/itens
+Content-Type: application/json
+
+{ "produtoId": 1, "quantidade": 2 }
+
+### Sessões
+GET {{api}}/sessoes/abertas
+
+###
+POST {{api}}/sessoes
+Content-Type: application/json
+
+{ "clienteId": 60, "estacaoId": 1, "origem": "paga", "comandaId": 55 }
+
+### Produtos
+GET {{api}}/produtos/estoque-baixo
+
+### Relatórios
+GET {{api}}/relatorios/faturamento
